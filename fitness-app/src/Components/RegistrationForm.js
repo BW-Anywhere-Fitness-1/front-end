@@ -26,7 +26,7 @@ const formSchema = yup.object().shape({
         .string()
         .required()
         .oneOf([yup.ref("password")], "Passwords must match"),
-    role: yup
+    role_id: yup
         .string()
         .required("Please select how you'd like to register"),
     terms: yup
@@ -43,7 +43,7 @@ export default function RegistrationForm() {
         email: "",
         password: "",
         passwordConfirmation: "",
-        role: "",
+        role_id: "",
         terms: ""
     });
 
@@ -61,7 +61,7 @@ export default function RegistrationForm() {
         email: "",
         password: "",
         passwordConfirmation: "",
-        role: "",
+        role_id: "",
         terms: ""
     });
 
@@ -103,7 +103,7 @@ export default function RegistrationForm() {
         e.preventDefault();
         console.log("submitted");
         axios
-            .post("https://reqres.in/api/users", users)
+            .post("https://any-fitness.herokuapp.com/api/v1/auth/signup", users)
             .then(res => console.log(res))
             .catch(err => console.log(err));
     };
@@ -171,18 +171,18 @@ export default function RegistrationForm() {
                 />
                 {errors.passwordConfirmation.length > 0 ? (<p className="error">{errors.passwordConfirmation}</p>) : null}
             </label>
-            <label htmlFor="role">
+            <label htmlFor="role_id">
                 Select Role:
                <select
-                    value={users.role}
-                    name="role"
-                    id="role"
+                    value={users.role_id}
+                    name="role_id"
+                    id="role_id"
                     onChange={inputChange}
                 >
                     <option value="instructor">Instructor</option>
                     <option value="client">Client</option>
                 </select>
-                {errors.role.length > 0 ? (<p className="error">{errors.role}</p>) : null}
+                {errors.role_id.length > 0 ? (<p className="error">{errors.role_id}</p>) : null}
             </label>
             <label htmlFor="terms">
                 <input
