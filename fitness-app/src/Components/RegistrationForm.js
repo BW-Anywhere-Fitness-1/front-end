@@ -29,6 +29,9 @@ const formSchema = yup.object().shape({
     role_id: yup
         .string()
         .required("Please select how you'd like to register"),
+    gender: yup
+        .string()
+        .required(),
     terms: yup
         .boolean()
         .oneOf([true], "Please agree to Terms & Conditions")
@@ -44,6 +47,7 @@ export default function RegistrationForm() {
         password: "",
         passwordConfirmation: "",
         role_id: "",
+        gender: "",
         terms: ""
     });
 
@@ -62,6 +66,7 @@ export default function RegistrationForm() {
         password: "",
         passwordConfirmation: "",
         role_id: "",
+        gender: "",
         terms: ""
     });
 
@@ -179,10 +184,26 @@ export default function RegistrationForm() {
                     id="role_id"
                     onChange={inputChange}
                 >
+                    <option value="select">Select One</option>
                     <option value="instructor">Instructor</option>
                     <option value="client">Client</option>
                 </select>
                 {errors.role_id.length > 0 ? (<p className="error">{errors.role_id}</p>) : null}
+            </label>
+            <label htmlFor="gender">
+                Gender:
+               <select
+                    value={users.gender}
+                    name="gender"
+                    id="gender"
+                    onChange={inputChange}
+                >
+                    <option value="select">Select One</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="non_binary">Non-binary</option>
+                </select>
+                {errors.gender.length > 0 ? (<p className="error">{errors.gender}</p>) : null}
             </label>
             <label htmlFor="terms">
                 <input
