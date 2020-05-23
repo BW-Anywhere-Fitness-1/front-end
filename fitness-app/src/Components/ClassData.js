@@ -28,8 +28,12 @@ export default function ClassData() {
                     <ClassCard
                     key={attr.id}
                     name={attr.name}
-                    city={attr.city}
-                    state={attr.state}
+                    start_time={attr.start_time}
+                    duration={attr.duration}
+                    schedule={attr.schedule}
+                    type={attr.type}
+                    level={attr.level}
+                    max_size={attr.max_size}
                     />
                 )
             })}
