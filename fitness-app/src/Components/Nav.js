@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 export default function Nav() {
     return (
         <div>
-            <nav>
-                <button> <Link to="/">Home</Link></button>
-                <button> <Link to="/register">Register</Link></button>
-                <button> <Link to="/login">Login</Link></button>
-                {/* <button> <Link to="/classes">Classes</Link></button> */}
+            <nav className='nav'> 
+                <button className='nav-btn'> <Link to="/" className='nav-link'>Home</Link></button>
+                <button className='nav-btn'> <Link to="/register" className='nav-link'>Register</Link></button>
+                <button className='nav-btn'> <Link to="/login" className='nav-link'>Login</Link></button>
+                <button className='nav-btn'> <Link to="/classes" className='nav-link'>Classes</Link></button>
             </nav>
             
         </div>
