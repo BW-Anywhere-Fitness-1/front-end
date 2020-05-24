@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import ClassCard from './ClassCard';
+// import { ClassContext } from "./ClassContext";
 
 export default function ClassData() {
     const [classData, setClassData] = useState([{

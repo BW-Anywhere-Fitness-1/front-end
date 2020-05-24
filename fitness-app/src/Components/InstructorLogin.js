@@ -73,10 +73,11 @@ export default function InstructorLogin() {
     };
 
     return (
-       <form onSubmit={formSubmit}>
-           <label htmlFor="email">
+       <form onSubmit={formSubmit} className='registerForm'>
+           <h2>For Instructors</h2>
+           <label htmlFor="email" className='labelForm'>
                Email: 
-               <input
+               <input className='inputForm'
                 type="email"
                 name="email"
                 id="email"
@@ -85,9 +86,9 @@ export default function InstructorLogin() {
                 />
            </label>
            {error.email.length > 0 ? (<p className="error">{error.email}</p>) : null}
-           <label htmlFor="password">
+           <label htmlFor="password" className='labelForm'>
                Password:
-               <input
+               <input className='inputForm'
                 type="password"
                 name="password"
                 id="password"
@@ -96,7 +97,7 @@ export default function InstructorLogin() {
                 />
            </label>
            {error.password.length > 0 ? (<p className="error">{error.password}</p>) : null}
-            <button disabled={buttonDisabled}>Login</button>
+            <button disabled={buttonDisabled} className='form-btn'>Login</button>
        </form>
     )
 }
