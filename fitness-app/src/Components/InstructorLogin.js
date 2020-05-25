@@ -45,7 +45,7 @@ export default function InstructorLogin() {
           .catch(err => {
               console.log("error", err);
               setError({
-                  ...error, [e.target.name]: err.error[0]});
+                  ...error, [e.target.name]: err.errors[0]});
           });
 
           setUser({
