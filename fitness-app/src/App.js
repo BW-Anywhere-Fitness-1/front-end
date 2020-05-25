@@ -4,6 +4,7 @@ import './App.css';
 import Home from './Components/Home';
 import RegistrationForm from './Components/RegistrationForm';
 import InstructorLogin from './Components/InstructorLogin';
+import ClientLogin from './Client/ClientLogin';
 import Nav from './Components/Nav';
 import ClassData from './Components/ClassData';
 
@@ -19,6 +20,9 @@ function App() {
       </Route>
       <Route exact path = "/login">
         <InstructorLogin />
+      </Route>
+      <Route exact path = "/clientlogin">
+        <ClientLogin />
       </Route>
       <Route exact path= "/classes">
         <ClassData />

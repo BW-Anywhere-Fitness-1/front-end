@@ -8,6 +8,7 @@ export default function Nav() {
                 <button> <Link to="/">Home</Link></button>
                 <button> <Link to="/register">Register</Link></button>
                 <button> <Link to="/login">Login</Link></button>
+                <button> <Link to="/clientlogin">Client Login</Link></button>
                 {/* <button> <Link to="/classes">Classes</Link></button> */}
             </nav>
             
