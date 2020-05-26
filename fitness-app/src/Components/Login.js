@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
-// import { AxiosWithAuth } from "../utils/AxiosWithAuth";
+import { AxiosWithAuth } from './utils/AxiosWithAuth';
 
 const Login = (props) => {
 	const [credentials, setCredentilas] = useState({
@@ -13,26 +14,25 @@ const Login = (props) => {
 			[e.target.name]: e.target.value,
 		});
 	};
-	// const login = (e) => {
-	// 	e.preventDefault();
-	// 	console.log(credentials);
-	// 	AxiosWithAuth()
-	// 		.post("/login", credentials)
-	// 		.then((res) => {
-	// 			localStorage.setItem("token", res.data.payload);
-	// 			props.history.push("/bubbles");
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err);
-	// 		});
-	// };
+	const login = (e) => {
+		e.preventDefault();
+		console.log(credentials);
+		AxiosWithAuth()
+			.post("/login", credentials)
+			.then((res) => {
+				localStorage.setItem("token", res.data.payload);
+				props.history.push("/classes");
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 	return (
-		<section className='loginForm'>
-			{/* <form onSubmit={login}> */}
-			<form className='registerForm'>
+		<div className='loginForm'>
+			<form onSubmit={login} className='registerForm'>
 				<h2>For Clients</h2>
 				<input
-				 className='inputForm'
+					className='inputForm'
 					type='text'
 					name='username'
 					placeholder='User Name'
@@ -55,7 +55,8 @@ const Login = (props) => {
 					Log In
 				</button>
 			</form>
-		</section>
+            <button className='nav-btn'> <Link to="/register" className='nav-link'>Register</Link></button>
+		</div>
 	);
 };
 
