@@ -68,7 +68,10 @@ export default function InstructorLogin() {
         console.log("submitted");
         axios
             .post("https://any-fitness.herokuapp.com/api/v1/auth/login/", user)
-            .then(res => console.log(res))
+            .then(res => 
+                localStorage.setItem("token", res.data.token))
+                
+                //console.log(res))
             .catch(err => console.log(err));
     };
 

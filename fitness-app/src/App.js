@@ -19,7 +19,7 @@ function App() {
 					<Nav />
 
 					<Switch>
-						<PrivateRoute path='/classes' component={ClassList} />
+						<PrivateRoute path='/classes' component={ClassData} />
 						<Route path='/instructorLogin' component={InstructorLogin} />
 						<Route path='/login' component={Login} />
 						<Route exact path='/' component={Home} />

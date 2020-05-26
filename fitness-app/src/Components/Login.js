@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import { AxiosWithAuth } from './utils/AxiosWithAuth';
+import { AxiosWithAuth } from "./utils/AxiosWithAuth";
 
 const Login = (props) => {
 	const [credentials, setCredentilas] = useState({
@@ -38,7 +38,6 @@ const Login = (props) => {
 					placeholder='User Name'
 					value={credentials.username}
 					onChange={handleChange}
-					className='form'
 				/>
 				<br />
 				<input
@@ -48,14 +47,17 @@ const Login = (props) => {
 					placeholder='Password'
 					value={credentials.password}
 					onChange={handleChange}
-					className='form'
 				/>
 				<br />
 				<button type='submit' className='form-btn'>
 					Log In
 				</button>
 			</form>
-            <button className='nav-btn'> <Link to="/register" className='nav-link'>Register</Link></button>
+			<button className='nav-btn'>
+				<Link to='/register' className='nav-link'>
+					Register
+				</Link>
+			</button>
 		</div>
 	);
 };
