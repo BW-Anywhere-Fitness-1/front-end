@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import {AxiosWithAuth} from "./utils/AxiosWithAuth";
+import { AxiosWithAuth } from "./utils/AxiosWithAuth";
 import { ClassContext } from "./ClassContext";
+import { Link } from "react-router-dom";
 
 function UpdateClasses(props) {
-    console.log('props are:' , props)
+	console.log("props are:", props);
 	const [classes, setClasses] = useContext(ClassContext);
 
 	// useEffect(() => {
@@ -27,13 +28,14 @@ function UpdateClasses(props) {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log(classes)
-		AxiosWithAuth.put(`/classes/${classes.id}`, classes)
+		console.log(classes);
+		AxiosWithAuth()
+			.put(`/classes/${classes.id}`, classes)
 			.then((result) => {
 				// redirect to the classes page after the success was successful,
 				// which will re-fetch the classes (and the updated data)
-                props.history.push("/classes");
-                // console.log(result)
+				props.history.push("/classes");
+				// console.log(result)
 			})
 			.catch((error) => {
 				console.log(error);
@@ -43,9 +45,15 @@ function UpdateClasses(props) {
 	return (
 		<>
 			<h1>Manage Classes</h1>
+			<button className='nav-btn-create'>
+				<Link to='/classes' className='nav-link'>
+					Back to Classes
+				</Link>
+			</button>
 
 			<form onSubmit={handleSubmit}>
 				<input
+					className='inputForm'
 					type='text'
 					name='name'
 					placeholder='Name'
@@ -53,6 +61,7 @@ function UpdateClasses(props) {
 					onChange={handleChange}
 				/>
 				<input
+					className='inputForm'
 					type='text'
 					name='duration'
 					placeholder='Duration'
@@ -60,7 +69,9 @@ function UpdateClasses(props) {
 					onChange={handleChange}
 				/>
 
-				<button type='submit'>Save</button>
+				<button type='submit' className='form-btn'>
+					Save
+				</button>
 			</form>
 		</>
 	);

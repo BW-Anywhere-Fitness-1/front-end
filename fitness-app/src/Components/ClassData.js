@@ -1,43 +1,38 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import ClassCard from "./ClassCard";
 import { ClassContext } from "./ClassContext";
-import UpdateClasses from "./UpdateClasses";
 import homeImg from "../Assets/home_img.jpg";
-import CreateClass from './CreateClass'
+import { AxiosWithAuth } from "./utils/AxiosWithAuth";
 
 export default function ClassData() {
-	const [classes, setClasses] = useContext(ClassContext);
+	const [classes, setClasses] = useState([])
 
 	useEffect(() => {
-		axios
-			.get("https://any-fitness.herokuapp.com/api/v1/search/classes?q=")
-			.then((res) => {
-				console.log(res.data);
-				setClasses(res.data);
-			})
-			.catch((err) => {
-				console.log("Error", err);
-			});
+		AxiosWithAuth()
+			.get("/classes")
+			.then((res) => setClasses(res.data));
 	}, []);
 
+	//deleting classes
 	const handleDelete = (event, id) => {
 		event.preventDefault();
 		const item = classes.find((item) => item.id === id);
+		//ask for confirmation before deleting
 		if (window.confirm("Are you sure you want to delete this user?")) {
-			// an optimistic update, assuming the request was successful
-			// so we don't have to wait for it to complete
-			setClasses(classes.filter((item) => item.id !== id));
+			
 
-			axios
+			AxiosWithAuth()
 				.delete(`/classes/${id}`)
 				.then((result) => {
-					console.log("Item was deleted");
+                    console.log("Item was deleted");
+                    setClasses(classes.filter((item) => item.id !== id));
 				})
 				.catch((error) => {
 					console.log(error);
 
-					// put user back if the request wasn't successful
+					// put class back if the request wasn't successful
 					setClasses([...classes, item]);
 				});
 		}
@@ -45,13 +40,20 @@ export default function ClassData() {
 
 	return (
 		<div>
+			<button className='nav-btn-create'>
+				<Link to='/create-class' className='nav-link'>
+					Create Class
+				</Link>
+			</button>
 			<h1 className='card-title'>Trending Classes</h1>
-			<UpdateClasses />
-            <CreateClass />
+
 			<div className='class-list'>
 				{classes.map((item) => (
 					<div className='class-item'>
-						<button onClick={(e) => handleDelete(e, classes.id)}>Delete</button>
+						<button onClick={(e) => handleDelete(e, item.id)}>Delete</button>
+						<button>
+							<Link to='/update'>Update</Link>
+						</button>
 						<img src={homeImg} alt='woman boxing' className='class-img' />
 						<ClassCard
 							key={item.id}

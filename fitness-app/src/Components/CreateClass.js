@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import {AxiosWithAuth} from './utils/AxiosWithAuth'
+import { AxiosWithAuth } from "./utils/AxiosWithAuth";
+import { Link } from "react-router-dom";
 
 export default function CreateClass() {
 	const [classes, setClasses] = useState({
@@ -30,8 +31,11 @@ export default function CreateClass() {
 			...classes,
 			type: parseInt(classes.type),
 			level: parseInt(classes.level),
-			schedule: classes.schedule.split(","),
+			attendees: parseInt(classes.attendees),
+			max_size: parseInt(classes.max_size),
+			schedule: classes.schedule.split(",").map((day) => day.trim()),
 		};
+		console.log(payload);
 		AxiosWithAuth()
 			.post("/classes", payload)
 			.then((res) => console.log(res))
@@ -41,7 +45,7 @@ export default function CreateClass() {
 	return (
 		<div className='create-class'>
 			<h1> Create a Class</h1>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className='registerForm'>
 				<label htmlFor='type' className='labelForm'>
 					Select type:
 					<select
@@ -57,7 +61,7 @@ export default function CreateClass() {
 						<option value='3'>Pilates</option>
 					</select>
 				</label>
-				<label htmlFor='name'>
+				<label htmlFor='name' className='labelForm'>
 					Name:
 					<input
 						type='text'
@@ -66,7 +70,7 @@ export default function CreateClass() {
 						onChange={handleChange}
 					></input>
 				</label>
-				<label htmlFor='start_time'>
+				<label htmlFor='start_time' className='labelForm'>
 					Start time:
 					<input
 						type='text'
@@ -75,7 +79,7 @@ export default function CreateClass() {
 						onChange={handleChange}
 					></input>
 				</label>
-				<label htmlFor='duration'>
+				<label htmlFor='duration' className='labelForm'>
 					Duration:
 					<input
 						type='text'
@@ -99,7 +103,7 @@ export default function CreateClass() {
 						<option value='3'>Advanced</option>
 					</select>
 				</label>
-				<label htmlFor='location'>
+				<label htmlFor='location' className='labelForm'>
 					Location:
 					<input
 						type='text'
@@ -108,16 +112,16 @@ export default function CreateClass() {
 						onChange={handleChange}
 					></input>
 				</label>
-				<label htmlFor='atendees'>
-					Atendees:
+				<label htmlFor='attendees' className='labelForm'>
+					Attendees:
 					<input
 						type='number'
-						name='atendees'
-						value={classes.atendees}
+						name='attendees'
+						value={classes.attendees}
 						onChange={handleChange}
 					></input>
 				</label>
-				<label htmlFor='max_size'>
+				<label htmlFor='max_size' className='labelForm'>
 					Max Size:
 					<input
 						type='number'
@@ -126,7 +130,7 @@ export default function CreateClass() {
 						onChange={handleChange}
 					></input>
 				</label>
-				<label htmlFor='schedule'>
+				<label htmlFor='schedule' className='labelForm'>
 					Schedule:
 					<input
 						type='text'
@@ -135,7 +139,7 @@ export default function CreateClass() {
 						onChange={handleChange}
 					></input>
 				</label>
-				<label htmlFor='description'>
+				<label htmlFor='description' className='labelForm'>
 					Description:
 					<textarea
 						name='description'
@@ -143,10 +147,16 @@ export default function CreateClass() {
 						onChange={handleChange}
 					/>
 				</label>
-				<button type='submit'>Submit</button>
+				<button type='submit' className='form-btn'>
+					Submit
+				</button>
+				<button className='nav-btn-create'>
+					<Link to='/classes' className='nav-link'>
+						Back to Classes
+					</Link>
+				</button>
 			</form>
 		</div>
 	);
 }
 
-// to create a class in database by axios.post
