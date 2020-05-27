@@ -25,6 +25,11 @@ export default function Nav() {
 						Classes
 					</Link>
 				</button>
+                <button className='nav-btn'>
+					<Link to='/auth-code' className='nav-link'>
+						Get Invitation
+					</Link>
+				</button>
 			</nav>
 		</div>
 	);

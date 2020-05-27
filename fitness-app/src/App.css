@@ -106,6 +106,16 @@ body {
 	/* border: solid yellow; */
 	margin: 10px;
 }
+
+.create-class  {
+	border: solid grey;
+	display: block;
+}
+
+.create-class input {
+	display: block;
+}
+
 /* .App-logo {
 	height: 40vmin;
 	pointer-events: none;

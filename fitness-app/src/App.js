@@ -10,6 +10,7 @@ import Login from "./Components/Login";
 import { ClassProvider } from "./Components/ClassContext";
 import ClassList from "./Components/ClassList";
 import PrivateRoute from "./Components/PrivateRoute";
+import InstructorInvitation from "./Components/InstructorInvitation";
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 						<Route path='/login' component={Login} />
 						<Route exact path='/' component={Home} />
 						<Route exact path='/register' component={RegistrationForm} />
+						<Route path='/auth-code' component={InstructorInvitation} />
 					</Switch>
 				</Router>
 			</ClassProvider>

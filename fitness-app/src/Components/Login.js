@@ -20,7 +20,7 @@ const Login = (props) => {
 		AxiosWithAuth()
 			.post("/login", credentials)
 			.then((res) => {
-				localStorage.setItem("token", res.data.payload);
+				localStorage.setItem("token", res.data.access_token);
 				props.history.push("/classes");
 			})
 			.catch((err) => {

@@ -29,6 +29,7 @@ const formSchema = yup.object().shape({
 	role_id: yup.string().required("Please select how you'd like to register"),
 	gender: yup.string().required(),
 	terms: yup.boolean().oneOf([true], "Please agree to Terms & Conditions"),
+	authCode: yup.number().required(),
 });
 
 export default function RegistrationForm() {
@@ -42,6 +43,7 @@ export default function RegistrationForm() {
 		role_id: "",
 		gender: "",
 		terms: "",
+		authCode: "",
 	});
 
 	const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -61,6 +63,7 @@ export default function RegistrationForm() {
 		role_id: "",
 		gender: "",
 		terms: "",
+		authCode: "",
 	});
 
 	const validate = (e) => {
@@ -102,8 +105,12 @@ export default function RegistrationForm() {
 	const formSubmit = (e) => {
 		e.preventDefault();
 		console.log("submitted");
+		const { passwordConfirmation, terms, ...rest } = users;
 		axios
-			.post("https://any-fitness.herokuapp.com/api/v1/auth/signup", users)
+			.post("https://any-fitness.herokuapp.com/api/v1/auth/signup", {
+				...rest,
+				role_id: parseInt(users.role_id),
+			})
 			.then((res) => console.log(res))
 			.catch((err) => console.log(err));
 	};
@@ -196,8 +203,8 @@ export default function RegistrationForm() {
 					onChange={inputChange}
 				>
 					<option value='select'>Select One</option>
-					<option value='instructor'>Instructor</option>
-					<option value='client'>Client</option>
+					<option value='3'>Instructor</option>
+					<option value='2'>Client</option>
 				</select>
 				{errors.role_id.length > 0 ? (
 					<p className='error'>{errors.role_id}</p>
@@ -235,7 +242,19 @@ export default function RegistrationForm() {
 					<p className='error'>{errors.terms}</p>
 				) : null}
 			</label>
-			<button disabled={buttonDisabled} className='form-btn'>Submit</button>
+			{users.role_id === "3" && (
+				<label>
+					<input
+						type='number'
+						id='authCode'
+						name='authCode'
+						onChange={inputChange}
+						value={users.authCode}
+					></input>
+				</label>
+			)}
+
+			<button className='form-btn'>Submit</button>
 		</form>
 	);
 }

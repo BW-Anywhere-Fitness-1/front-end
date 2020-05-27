@@ -4,6 +4,7 @@ import ClassCard from "./ClassCard";
 import { ClassContext } from "./ClassContext";
 import UpdateClasses from "./UpdateClasses";
 import homeImg from "../Assets/home_img.jpg";
+import CreateClass from './CreateClass'
 
 export default function ClassData() {
 	const [classes, setClasses] = useContext(ClassContext);
@@ -46,6 +47,7 @@ export default function ClassData() {
 		<div>
 			<h1 className='card-title'>Trending Classes</h1>
 			<UpdateClasses />
+            <CreateClass />
 			<div className='class-list'>
 				{classes.map((item) => (
 					<div className='class-item'>
