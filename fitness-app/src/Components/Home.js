@@ -7,7 +7,9 @@ export default function Home() {
 			{/* <div className='homeImg home-item' ><img src={homeImg} alt='woman boxing' /></div> */}
 			<div className='home-title'>
 				<h1>Welcome to Anywhere Fitness!</h1>
-				<h2>The world is your gym. Welcome.</h2>
+				<h1>
+					The world is your gym. <br /> Welcome.
+				</h1>
 			</div>
 		</div>
 	);

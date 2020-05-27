@@ -32,9 +32,14 @@ body {
 	overflow: hidden;
 }
 .home-title {
-	display: inline-block;
-	margin: 70px;
+	display: flex;
+	width: fit-content;
+	flex-direction: column;
+	align-items: center;
+	margin: 150px;
+	/* border: solid; */
 }
+
 /* .loginForm {
   border: solid;
   width: 50%;
@@ -80,6 +85,13 @@ body {
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 }
+.class-item {
+ 
+  width: 20%; 
+}
+.class-img {
+  width: 250px;
+}
 .card-title {
 	margin: 20px;
 	text-align: center;
@@ -94,6 +106,16 @@ body {
 	/* border: solid yellow; */
 	margin: 10px;
 }
+
+.create-class  {
+	border: solid grey;
+	display: block;
+}
+
+.create-class input {
+	display: block;
+}
+
 /* .App-logo {
 	height: 40vmin;
 	pointer-events: none;

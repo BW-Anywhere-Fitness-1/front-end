@@ -1,12 +1,19 @@
 import axios from "axios";
 
-export const AxiosWithAuth = () => {
-	const token = localStorage.getItem("token");
+export function getToken() {
+	return localStorage.getItem("token");
+}
 
+export const AxiosWithAuth = () => {
+	//add url in baseURL
 	return axios.create({
-		baseURL: "",
+		baseURL: "https://any-fitness.herokuapp.com/api/v1/",
 		headers: {
-			Authorization: token,
+			Authorization: `Bearer ${getToken()}`,
 		},
 	});
 };
+
+
+//alex1@mail.com
+//!Alex@Here1
