@@ -23,7 +23,7 @@ body {
 .nav-link {
 	text-decoration: none;
 	color: white;
-	font-size: 16px;
+	font-size: 14px;
 }
 .home-page {
 	background: url("./Assets/fitnessHome.jpg") no-repeat center center fixed;
@@ -71,13 +71,25 @@ body {
 	border-radius: 5px;
 	margin: 10px;
 }
+.class-btn {
+	border: none;
+	background-color: #4e4a5c;
+	color: white;
+	width: 100px;
+	height: 30px;
+	font-size: 14px;
+	box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	margin: 10px;
+	cursor: pointer;
+}
 .nav-btn-create {
 	border: none;
 	width: 135px;
 	height: 35px;
 	background: #ff9233;
 	box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 5px; 
+	border-radius: 5px;
 	float: right;
 }
 .class-list {
@@ -88,9 +100,12 @@ body {
 }
 .class-item {
 	width: 20%;
+	border: 1px solid grey;
+	padding: 10px;
 }
 .class-img {
-	width: 250px;
+	width: 100%;
+	height: auto;
 }
 .card-title {
 	margin: 20px;
@@ -116,8 +131,6 @@ body {
 	margin-top: 30px;
 }
 .invitation {
-
 	text-align: center;
 	margin: 100px;
 }
-

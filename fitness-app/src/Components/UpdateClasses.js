@@ -53,7 +53,7 @@ function UpdateClasses(props) {
 
 			<form onSubmit={handleSubmit}>
 				<input
-					className='inputForm'
+                className='inputForm'
 					type='text'
 					name='name'
 					placeholder='Name'
@@ -61,7 +61,7 @@ function UpdateClasses(props) {
 					onChange={handleChange}
 				/>
 				<input
-					className='inputForm'
+                className='inputForm'
 					type='text'
 					name='duration'
 					placeholder='Duration'
@@ -69,9 +69,7 @@ function UpdateClasses(props) {
 					onChange={handleChange}
 				/>
 
-				<button type='submit' className='form-btn'>
-					Save
-				</button>
+				<button type='submit' className='form-btn'>Save</button>
 			</form>
 		</>
 	);

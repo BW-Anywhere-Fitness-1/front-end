@@ -15,7 +15,7 @@ import InstructorLogin from "./Components/InstructorLogin";
 
 function App() {
 	return (
-		<div className='App'>
+		<div className='App'> 
 			<ClassProvider>
 				<Router>
 					<Nav />
