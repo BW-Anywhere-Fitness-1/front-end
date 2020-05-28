@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function InstructorInvitation() {
 	const [email, setEmail] = useState("");
@@ -15,16 +16,22 @@ export default function InstructorInvitation() {
 	};
 
 	return (
-		<div>
+		<div className='invitation'>
 			<form onSubmit={handleSubmit}>
 				<input
+					className='inputForm'
 					type='email'
 					name='email'
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				></input>
-				<button>Submit</button>
+				<button className='form-btn'>Submit</button>
 			</form>
+			<button className='nav-btn-create'>
+				<Link to='/classes' className='nav-link'>
+					Back to Classes
+				</Link>
+			</button>
 		</div>
 	);
 }

@@ -1,65 +1,120 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import * as yup from "yup";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
-import { AxiosWithAuth } from "./utils/AxiosWithAuth";
+const formSchema = yup.object().shape({
+	email: yup
+		.string()
+		.email("Must be a vlaid email")
+		.required("Must include email address"),
+	password: yup.string().required("Password is a required field"),
+});
 
-const Login = (props) => {
-	const [credentials, setCredentilas] = useState({
-		username: "",
+export default function InstructorLogin() {
+	const [user, setUser] = useState({
+		email: "",
 		password: "",
 	});
-	const handleChange = (e) => {
-		setCredentilas({
-			...credentials,
+
+	const [buttonDisabled, setButtonDisabled] = useState(true);
+
+	useEffect(() => {
+		formSchema.isValid(user).then((valid) => {
+			setButtonDisabled(!valid);
+		});
+	}, [user]);
+
+	const [error, setError] = useState({
+		email: "",
+		password: "",
+	});
+
+	const validate = (e) => {
+		yup
+			.reach(formSchema, e.target.name)
+			.validate(e.target.value)
+			.then((valid) => {
+				setError({
+					...error,
+					[e.target.name]: "",
+				});
+			})
+			.catch((err) => {
+				console.log("error", err);
+				setError({
+					...error,
+					[e.target.name]: err.errors[0],
+				});
+			});
+
+		setUser({
+			...user,
 			[e.target.name]: e.target.value,
 		});
 	};
-	const login = (e) => {
-		e.preventDefault();
-		console.log(credentials);
-		AxiosWithAuth()
-			.post("/login", credentials)
-			.then((res) => {
-				localStorage.setItem("token", res.data.access_token);
-				props.history.push("/classes");
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+
+	const inputChange = (e) => {
+		e.persist();
+		validate(e);
+		setUser({
+			...user,
+			[e.target.name]: e.target.value,
+		});
 	};
+
+	//redirect to login page by using useHistory !!!!
+	const formSubmit = (e) => {
+		e.preventDefault();
+		console.log("submitted");
+		axios
+			.post("https://any-fitness.herokuapp.com/api/v1/auth/login/", user)
+			.then((res) => localStorage.setItem("token", res.data.access_token))
+
+			// console.log(res))
+			.catch((err) => console.log(err));
+	};
+
 	return (
-		<div className='loginForm'>
-			<form onSubmit={login} className='registerForm'>
-				<h2>For Clients</h2>
+		<form onSubmit={formSubmit} className='registerForm'>
+			<h2>For Clients</h2>
+			<label htmlFor='email' className='labelForm'>
+				Email:
 				<input
 					className='inputForm'
-					type='text'
-					name='username'
-					placeholder='User Name'
-					value={credentials.username}
-					onChange={handleChange}
+					type='email'
+					name='email'
+					id='email'
+					value={user.email}
+					onChange={inputChange}
 				/>
-				<br />
+			</label>
+			{error.email.length > 0 ? <p className='error'>{error.email}</p> : null}
+			<label htmlFor='password' className='labelForm'>
+				Password:
 				<input
 					className='inputForm'
 					type='password'
 					name='password'
-					placeholder='Password'
-					value={credentials.password}
-					onChange={handleChange}
+					id='password'
+					value={user.password}
+					onChange={inputChange}
 				/>
-				<br />
-				<button type='submit' className='form-btn'>
-					Log In
-				</button>
-			</form>
+			</label>
+			{error.password.length > 0 ? (
+				<p className='error'>{error.password}</p>
+			) : null}
+			<button disabled={buttonDisabled} className='form-btn'>
+				Login
+			</button>
 			<button className='nav-btn'>
 				<Link to='/register' className='nav-link'>
 					Register
 				</Link>
 			</button>
-		</div>
+		</form>
 	);
-};
+}
 
-export default Login;
+
+

@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ClassProvider } from "./Components/ClassContext";
 import "./App.css";
-import Home from "./Components/Home";
-import RegistrationForm from "./Components/RegistrationForm";
-import InstructorLogin from "./Components/InstructorLogin";
+import PrivateRoute from "./Components/PrivateRoute";
 import Nav from "./Components/Nav";
 import ClassData from "./Components/ClassData";
 import Login from "./Components/Login";
-import { ClassProvider } from "./Components/ClassContext";
-import ClassList from "./Components/ClassList";
-import PrivateRoute from "./Components/PrivateRoute";
 import InstructorInvitation from "./Components/InstructorInvitation";
+import CreateClass from "./Components/CreateClass";
+import Home from "./Components/Home";
+import RegistrationForm from "./Components/RegistrationForm";
+import InstructorLogin from "./Components/InstructorLogin";
 
 function App() {
 	return (
@@ -26,6 +26,7 @@ function App() {
 						<Route exact path='/' component={Home} />
 						<Route exact path='/register' component={RegistrationForm} />
 						<Route path='/auth-code' component={InstructorInvitation} />
+						<Route path='/create-class' component={CreateClass} />
 					</Switch>
 				</Router>
 			</ClassProvider>

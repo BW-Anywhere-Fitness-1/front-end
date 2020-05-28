@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const formSchema = yup.object().shape({
 	email: yup
@@ -61,7 +62,8 @@ export default function InstructorLogin() {
 			[e.target.name]: e.target.value,
 		});
 	};
-//redirect to login page by using useHistory !!!!
+
+	//redirect to login page by using useHistory !!!!
 	const formSubmit = (e) => {
 		e.preventDefault();
 		console.log("submitted");
@@ -104,6 +106,11 @@ export default function InstructorLogin() {
 			) : null}
 			<button disabled={buttonDisabled} className='form-btn'>
 				Login
+			</button>
+			<button className='nav-btn'>
+				<Link to='/register' className='nav-link'>
+					Register
+				</Link>
 			</button>
 		</form>
 	);
