@@ -40,32 +40,31 @@ export default function ClassData() {
 	// Saving edited class
 	const saveEdit = (e) => {
 		e.preventDefault();
-        console.log(classToEdit)
-		// const payload = {
-		// 	...classToEdit,
-		// 	type: parseInt(classToEdit.type),
-		// 	level: parseInt(classToEdit.level),
-		// 	attendees: parseInt(classToEdit.attendees),
-		// 	max_size: parseInt(classToEdit.max_size),
-		// 	schedule: classToEdit.schedule.split(",").map((day) => day.trim()),
-		// };
-		// console.log('payload', payload);
-        const id = classToEdit.id;
-    
+		console.log(classToEdit);
+		const payload = {
+			...classToEdit,
+			type: parseInt(classToEdit.type),
+			level: parseInt(classToEdit.level),
+			attendees: parseInt(classToEdit.attendees),
+			max_size: parseInt(classToEdit.max_size),
+			schedule: classToEdit.schedule.split(",").map((day) => day.trim()),
+		};
+		console.log("payload", payload);
+		const id = classToEdit.id;
 
-		// AxiosWithAuth()
-		// 	.put(`/classes/${id}`, payload)
+		AxiosWithAuth()
+			.put(`/classes/${id}`, payload)
 
-		// 	.then((res) => {
-		// 		setEditing(false);
-		// 		getClasses();
-		// 	})
-		// 	.catch((err) => console.log("Edit Error: ", err));
+			.then((res) => {
+				setEditing(false);
+				getClasses();
+			})
+			.catch((err) => console.log("Edit Error: ", err));
 	};
 
 	const handleChange = (e) => {
 		e.preventDefault();
-		setClassToEdit({ [e.target.name]: e.target.value });
+		setClassToEdit({ ...classToEdit, [e.target.name]: e.target.value });
 	};
 
 	//deleting classes
@@ -125,39 +124,8 @@ export default function ClassData() {
 					</div>
 				))}
 			</div>
-
+			{/* Editing Form*/}
 			{editing && (
-				// <form onSubmit={saveEdit}>
-				// 	<legend>Edit Class</legend>
-				// 	<label>
-				// 		Class name:
-				// 		<input
-				// 			onChange={(e) =>
-				// 				setClassToEdit({ ...classToEdit, name: e.target.value })
-				// 			}
-				// 			value={classToEdit.name}
-				// 		/>
-				// 	</label>
-				//     <label>
-				// 		Class type:
-				// 		<input
-				// 			onChange={(e) =>
-				// 				setClassToEdit({ ...classToEdit, type: e.target.value })
-				// 			}
-				// 			value={classToEdit.type}
-				// 		/>
-				// 	</label>
-				//     <label>
-				// 		Schedule:
-				// 		<input
-				// 			onChange={(e) =>
-				// 				setClassToEdit({ ...classToEdit, schedule: e.target.value })
-				// 			}
-				// 			value={classToEdit.schedule}
-				// 		/>
-				// 	</label>
-				//     <button type='submit'>Submit</button>
-				// </form>
 				<form onSubmit={saveEdit} className='registerForm'>
 					<label htmlFor='type' className='labelForm'>
 						Select type:

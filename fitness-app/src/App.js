@@ -7,7 +7,6 @@ import Nav from "./Components/Nav";
 import ClassData from "./Components/ClassData";
 import Login from "./Components/Login";
 import InstructorInvitation from "./Components/InstructorInvitation";
-import UpdateClasses from "./Components/UpdateClasses";
 import CreateClass from "./Components/CreateClass";
 import Home from "./Components/Home";
 import RegistrationForm from "./Components/RegistrationForm";
@@ -15,7 +14,7 @@ import InstructorLogin from "./Components/InstructorLogin";
 
 function App() {
 	return (
-		<div className='App'> 
+		<div className='App'>
 			<ClassProvider>
 				<Router>
 					<Nav />
@@ -27,7 +26,6 @@ function App() {
 						<Route exact path='/' component={Home} />
 						<Route exact path='/register' component={RegistrationForm} />
 						<Route path='/auth-code' component={InstructorInvitation} />
-						<Route path='/update' component={UpdateClasses} />
 						<Route path='/create-class' component={CreateClass} />
 					</Switch>
 				</Router>
