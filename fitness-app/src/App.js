@@ -13,25 +13,25 @@ import RegistrationForm from "./Components/RegistrationForm";
 import InstructorLogin from "./Components/InstructorLogin";
 
 function App() {
-	return (
-		<div className='App'>
-			<ClassProvider>
-				<Router>
-					<Nav />
+  return (
+    <div className="App">
+      <ClassProvider>
+        <Router>
+          <Nav />
 
-					<Switch>
-						<PrivateRoute path='/classes' component={ClassData} />
-						<Route path='/instructorLogin' component={InstructorLogin} />
-						<Route path='/login' component={Login} />
-						<Route exact path='/' component={Home} />
-						<Route exact path='/register' component={RegistrationForm} />
-						<Route path='/auth-code' component={InstructorInvitation} />
-						<Route path='/create-class' component={CreateClass} />
-					</Switch>
-				</Router>
-			</ClassProvider>
-		</div>
-	);
+          <Switch>
+            <PrivateRoute path="/classes" component={ClassData} />
+            <Route path="/instructorLogin" component={InstructorLogin} />
+            <Route path="/login" component={Login} />
+            <PrivateRoute exact path="/" component={Home} />
+            <Route exact path="/register" component={RegistrationForm} />
+            <Route path="/auth-code" component={InstructorInvitation} />
+            <PrivateRoute path="/create-class" component={CreateClass} />
+          </Switch>
+        </Router>
+      </ClassProvider>
+    </div>
+  );
 }
 
 export default App;
