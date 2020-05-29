@@ -141,7 +141,11 @@ body {
   font-size: 100%;
   overflow-x: hidden;
   padding: 80px 0 0;
-  
+  font-family: Open Sans;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Raleway Bold;
 }
 
 input,
@@ -337,6 +341,7 @@ input[type="checkbox"] {
   font-size: 0.85rem;
   padding: 5px 0;
   color: red;
+  margin-left: 5px;
 }
 
 .go-to {
@@ -447,3 +452,11 @@ input[type="checkbox"] {
 .class-btn.danger:hover {
   background-color: #ffcdd2;
 }
+
+.terms-btn {
+	margin-left: 20px;
+	background-color: #ffebee;
+	color: #f44336;
+}
+
+

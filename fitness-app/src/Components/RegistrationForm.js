@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import axios from "axios";
+import TermsModal from './TermsModal';
 
 const formSchema = yup.object().shape({
   first_name: yup
@@ -120,6 +121,8 @@ export default function RegistrationForm() {
       .catch((err) => console.log(err));
   };
   console.log(errors.passwordConfirmation);
+
+  const [modalShow, setModalShow] = React.useState(false);
 
   return (
     <form onSubmit={formSubmit} className="container registerForm">
@@ -256,9 +259,20 @@ export default function RegistrationForm() {
           checked={users.terms}
           onChange={inputChange}
         />
-        <Link to="/terms" onClick={(e) => e.preventDefault()}>
+		   <>
+           <button className="terms-btn" variant="primary" onClick={() => setModalShow(true)}>
+        Terms & Conditiions
+      </button>
+	
+      <TermsModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+    </>
+        {/* <Link to="/terms" onClick={(e) => e.preventDefault()}>
           Terms & Conditions
-        </Link>
+        </Link> */}
+		
         {errors.terms.length > 0 ? (
           <>
             <p className="error">{errors.terms}</p>

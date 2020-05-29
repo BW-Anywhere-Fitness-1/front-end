@@ -9,7 +9,7 @@ import { jwtDecode } from "./utils/jwtDecode";
 const formSchema = yup.object().shape({
   email: yup
     .string()
-    .email("Must be a vlaid email")
+    .email("Must be a valid email")
     .required("Must include email address"),
   password: yup.string().required("Password is a required field"),
 });

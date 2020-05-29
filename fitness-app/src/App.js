@@ -12,6 +12,7 @@ import Home from "./Components/Home";
 import RegistrationForm from "./Components/RegistrationForm";
 import InstructorLogin from "./Components/InstructorLogin";
 
+
 function App() {
   return (
     <div className="App">
