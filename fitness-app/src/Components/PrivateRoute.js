@@ -10,7 +10,7 @@ function PrivateRoute(props) {
     <Route
       {...rest}
       render={(renderProps) => {
-        if (user.access_token) {
+        if (user && user.access_token) {
           // We are logged in, so render the component as normal
           // Passing "renderProps" so "Component" has access to all
           // the React Router stuff

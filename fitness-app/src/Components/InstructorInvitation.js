@@ -37,7 +37,7 @@ export default function InstructorInvitation() {
           ></input>
         </label>
         {authCode && (
-          <div className="alert info">
+          <div className="alert success">
             Please go the register and enter the following One-Time
             authentication to sign up: <br />
             <br />

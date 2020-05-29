@@ -9,7 +9,7 @@ import { jwtDecode } from "./utils/jwtDecode";
 const formSchema = yup.object().shape({
   email: yup
     .string()
-    .email("Must be a vlaid email")
+    .email("Must be a valid email")
     .required("Must include email address"),
   password: yup.string().required("Password is a required field"),
 });
@@ -83,13 +83,22 @@ export default function InstructorLogin() {
         });
         window.location = "/";
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setError({
+          ...error,
+          message: err.response.data.message,
+        });
+        console.log(err.response);
+      });
   };
 
   return (
     <div className="login-container">
       <form onSubmit={formSubmit} className="login registerForm">
         <h2>Login</h2>
+        {error.message && (
+          <div className="alert danger mb-25">{error.message}</div>
+        )}
         <label htmlFor="email" className="labelForm">
           Email:
           <input
