@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import axios from "axios";
-import TermsModal from './TermsModal';
+import TermsModal from "./TermsModal";
 
 const formSchema = yup.object().shape({
   first_name: yup
@@ -50,6 +50,7 @@ export default function RegistrationForm() {
   const history = useHistory();
 
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [showTerms, setShowTerms] = useState(false);
 
   useEffect(() => {
     formSchema.isValid(users).then((valid) => {
@@ -120,180 +121,179 @@ export default function RegistrationForm() {
       })
       .catch((err) => console.log(err));
   };
-  console.log(errors.passwordConfirmation);
-
-  const [modalShow, setModalShow] = React.useState(false);
 
   return (
-    <form onSubmit={formSubmit} className="container registerForm">
-      <h1 className="form-title">Register</h1>
-      <label htmlFor="first_name" className="labelForm">
-        First Name:
-        <input
-          className="inputForm"
-          type="text"
-          name="first_name"
-          id="first_name"
-          placeholder="First Name"
-          value={users.first_name}
-          onChange={inputChange}
-        />
-        {errors.first_name.length > 0 ? (
-          <p className="error">{errors.name}</p>
-        ) : null}
-      </label>
-      <label htmlFor="last_name" className="labelForm">
-        Last Name:
-        <input
-          className="inputForm"
-          type="text"
-          name="last_name"
-          id="last_name"
-          placeholder="Last Name"
-          value={users.last_name}
-          onChange={inputChange}
-        />
-        {errors.last_name.length > 0 ? (
-          <p className="error">{errors.last_name}</p>
-        ) : null}
-      </label>
-      <label htmlFor="email" className="labelForm">
-        Email:
-        <input
-          className="inputForm"
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Email"
-          value={users.email}
-          onChange={inputChange}
-        />
-        {errors.email.length > 0 ? (
-          <p className="error">{errors.email}</p>
-        ) : null}
-      </label>
-      <label htmlFor="password" className="labelForm">
-        Password:
-        <input
-          className="inputForm"
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-          value={users.password}
-          onChange={inputChange}
-        />
-        {errors.password.length > 8 ? (
-          <p className="error">{errors.password}</p>
-        ) : null}
-      </label>
-      <label htmlFor="passwordConfirmation" className="labelForm">
-        Password:
-        <input
-          className="inputForm"
-          type="password"
-          name="passwordConfirmation"
-          id="passwordConfirmation"
-          placeholder="Confirm Password"
-          value={users.passwordConfirmation}
-          onChange={inputChange}
-        />
-        {errors.passwordConfirmation.length > 0 ? (
-          <p className="error">{errors.passwordConfirmation}</p>
-        ) : null}
-      </label>
-      <label htmlFor="role_id" className="labelForm">
-        Select Role:
-        <select
-          className="inputForm"
-          value={users.role_id}
-          name="role_id"
-          id="role_id"
-          onChange={inputChange}
-        >
-          <option value="select">Select One</option>
-          <option value="3">Instructor</option>
-          <option value="2">Client</option>
-        </select>
-        {errors.role_id.length > 0 ? (
-          <p className="error">{errors.role_id}</p>
-        ) : null}
-      </label>
-      <label htmlFor="gender" className="labelForm">
-        Gender:
-        <select
-          className="inputForm"
-          value={users.gender}
-          name="gender"
-          id="gender"
-          onChange={inputChange}
-        >
-          <option value="select">Select One</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="non_binary">Non-binary</option>
-        </select>
-        {errors.gender.length > 0 ? (
-          <p className="error">{errors.gender}</p>
-        ) : null}
-      </label>
-      {users.role_id === "3" && (
-        <label>
-          Authentication code
+    <>
+      <form onSubmit={formSubmit} className="container reg-form">
+        <h1 className="form-title">Register</h1>
+        <label htmlFor="first_name" className="labelForm">
+          First Name:
           <input
-            type="number"
-            id="authCode"
-            name="authCode"
+            className="inputForm"
+            type="text"
+            name="first_name"
+            id="first_name"
+            placeholder="First Name"
+            value={users.first_name}
             onChange={inputChange}
-            value={users.authCode}
-            placeholder="000000"
-          ></input>
+          />
+          {errors.first_name.length > 0 ? (
+            <p className="error">{errors.name}</p>
+          ) : null}
         </label>
-      )}
-      <label htmlFor="terms" className="labelForm term">
-        <input
-          className="inputForm"
-          type="checkbox"
-          id="terms"
-          name="terms"
-          checked={users.terms}
-          onChange={inputChange}
-        />
-		   <>
-           <button className="terms-btn" variant="primary" onClick={() => setModalShow(true)}>
-        Terms & Conditiions
-      </button>
-	
+        <label htmlFor="last_name" className="labelForm">
+          Last Name:
+          <input
+            className="inputForm"
+            type="text"
+            name="last_name"
+            id="last_name"
+            placeholder="Last Name"
+            value={users.last_name}
+            onChange={inputChange}
+          />
+          {errors.last_name.length > 0 ? (
+            <p className="error">{errors.last_name}</p>
+          ) : null}
+        </label>
+        <label htmlFor="email" className="labelForm">
+          Email:
+          <input
+            className="inputForm"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            value={users.email}
+            onChange={inputChange}
+          />
+          {errors.email.length > 0 ? (
+            <p className="error">{errors.email}</p>
+          ) : null}
+        </label>
+        <label htmlFor="password" className="labelForm">
+          Password:
+          <input
+            className="inputForm"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            value={users.password}
+            onChange={inputChange}
+          />
+          {errors.password.length > 8 ? (
+            <p className="error">{errors.password}</p>
+          ) : null}
+        </label>
+        <label htmlFor="passwordConfirmation" className="labelForm">
+          Password:
+          <input
+            className="inputForm"
+            type="password"
+            name="passwordConfirmation"
+            id="passwordConfirmation"
+            placeholder="Confirm Password"
+            value={users.passwordConfirmation}
+            onChange={inputChange}
+          />
+          {errors.passwordConfirmation.length > 0 ? (
+            <p className="error">{errors.passwordConfirmation}</p>
+          ) : null}
+        </label>
+        <label htmlFor="role_id" className="labelForm">
+          Select Role:
+          <select
+            className="inputForm"
+            value={users.role_id}
+            name="role_id"
+            id="role_id"
+            onChange={inputChange}
+          >
+            <option value="select">Select One</option>
+            <option value="3">Instructor</option>
+            <option value="2">Client</option>
+          </select>
+          {errors.role_id.length > 0 ? (
+            <p className="error">{errors.role_id}</p>
+          ) : null}
+        </label>
+        <label htmlFor="gender" className="labelForm">
+          Gender:
+          <select
+            className="inputForm"
+            value={users.gender}
+            name="gender"
+            id="gender"
+            onChange={inputChange}
+          >
+            <option value="select">Select One</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="non_binary">Non-binary</option>
+          </select>
+          {errors.gender.length > 0 ? (
+            <p className="error">{errors.gender}</p>
+          ) : null}
+        </label>
+        {users.role_id === "3" && (
+          <label>
+            Authentication code
+            <input
+              type="number"
+              id="authCode"
+              name="authCode"
+              onChange={inputChange}
+              value={users.authCode}
+              placeholder="000000"
+            ></input>
+          </label>
+        )}
+        <label htmlFor="terms" className="labelForm term">
+          <input
+            className="inputForm"
+            type="checkbox"
+            id="terms"
+            name="terms"
+            checked={users.terms}
+            onChange={inputChange}
+          />
+          <Link
+            to="/terms"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowTerms(true);
+            }}
+          >
+            Terms & Conditions
+          </Link>
+          {errors.terms.length > 0 ? (
+            <>
+              <p className="error">{errors.terms}</p>
+            </>
+          ) : null}
+        </label>
+
+        <button className="form-btn">Submit</button>
+
+        <div className="go-to">
+          <p>
+            I have an account <Link to="/login">go to login.</Link>
+          </p>
+        </div>
+        <div className="invitation-link">
+          <p>
+            If you want to join our team of instructor follow the link below to
+            get the One-Time authentication code:
+            <Link to="/auth-code">Get code</Link>
+          </p>
+        </div>
+      </form>
       <TermsModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
+        show={showTerms}
+        display={setShowTerms}
+        accept={(value) => setUsers({ ...users, terms: value })}
       />
     </>
-        {/* <Link to="/terms" onClick={(e) => e.preventDefault()}>
-          Terms & Conditions
-        </Link> */}
-		
-        {errors.terms.length > 0 ? (
-          <>
-            <p className="error">{errors.terms}</p>
-          </>
-        ) : null}
-      </label>
-
-      <button className="form-btn">Submit</button>
-
-      <div className="go-to">
-        <p>
-          I have an account <Link to="/login">go to login.</Link>
-        </p>
-      </div>
-      <div className="invitation-link">
-        <p>
-          If you would like to join our team of instructors follow the link below to
-          get the One-Time authentication code:
-          <Link to="/auth-code">Get code</Link>
-        </p>
-      </div>
-    </form>
   );
 }

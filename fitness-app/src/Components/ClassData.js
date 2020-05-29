@@ -25,10 +25,15 @@ export default function ClassData() {
   const [editing, setEditing] = useState(false);
   const [classToEdit, setClassToEdit] = useState(initialClass);
   const [user, setUser] = useLocalStorage("user", null);
-
+  const [currentEnroll, setCurrentEnroll] = useState({});
   useEffect(() => {
-    getClasses();
-    getRegistrations();
+    if (registrations.length === currentEnroll) {
+      return;
+    } else {
+      getClasses();
+      getRegistrations();
+      setCurrentEnroll(registrations.length);
+    }
   }, []);
 
   const getClasses = () => {
@@ -43,34 +48,17 @@ export default function ClassData() {
       .then((res) => setRegistrations(res.data));
   };
 
-  const isRegister = (classes) => {
-    if (classes.max_size === classes.attendees) return true;
-    if (classes && classes.id) {
+  const isRegister = (classesItem) => {
+    if (classesItem.max_size === classesItem.attendees) return true;
+    if (classesItem && classesItem.id) {
       const reg = registrations.filter(
         (reg) =>
-          reg.class_id === classes.id && reg.student_id === user.payload.subject
+          reg.class_id === classesItem.id &&
+          reg.student_id === user.payload.subject
       );
       return reg.length && reg[0].id ? true : false;
     }
     return false;
-  };
-
-  const handleCancel = (classes) => {
-    if (classes && classes.id) {
-      const reg = registrations.filter(
-        (reg) =>
-          reg.class_id === classes.id && reg.student_id === user.payload.subject
-      );
-      if (reg.length && reg[0].id) {
-        AxiosWithAuth()
-          .delete(`/registrations/${reg[0].id}`)
-          .then((res) => {
-            getClasses();
-            getRegistrations();
-          })
-          .catch((error) => console.log(error.response.data));
-      }
-    }
   };
 
   //Editing class
@@ -118,10 +106,30 @@ export default function ClassData() {
     AxiosWithAuth()
       .post("/registrations", { class_id: item.id })
       .then((res) => {
-        console.log(res.data);
         getClasses();
+        getRegistrations();
       })
       .catch((error) => console.log(error.response.data));
+  };
+
+  const handleCancel = (e, classesItem) => {
+    e.preventDefault();
+    if (classesItem) {
+      const reg = registrations.filter(
+        (reg) =>
+          reg.class_id === classesItem.id &&
+          reg.student_id === user.payload.subject
+      );
+      if (reg.length && reg[0].id) {
+        AxiosWithAuth()
+          .delete(`/registrations/${reg[0].id}`)
+          .then((res) => {
+            getClasses();
+            getRegistrations();
+          })
+          .catch((error) => console.log(error.response.data));
+      }
+    }
   };
 
   //deleting classes
@@ -167,16 +175,16 @@ export default function ClassData() {
                 {user.payload.role_id === 3 && (
                   <div className="card-actions">
                     <button
-                      onClick={(e) => handleDelete(e, item.id)}
-                      className="class-btn"
-                    >
-                      Delete
-                    </button>
-                    <button
                       onClick={() => editClass(item)}
                       className="class-btn"
                     >
                       Update
+                    </button>
+                    <button
+                      onClick={(e) => handleDelete(e, item.id)}
+                      className="class-btn danger"
+                    >
+                      Delete
                     </button>
                   </div>
                 )}

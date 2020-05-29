@@ -144,8 +144,13 @@ body {
   font-family: Open Sans;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	font-family: Raleway Bold;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Raleway Bold;
 }
 
 input,
@@ -301,11 +306,19 @@ textarea {
   display: block;
   width: 100%;
   padding: 15px;
-  background-color: #c8e6c9;
   font-weight: bold;
-  color: #1b5e20;
   border-radius: 4px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+
+  &.success {
+    background-color: #c8e6c9;
+    color: #1b5e20;
+  }
+
+  &.danger {
+    background-color: #ffebee;
+    color: red;
+  }
 }
 
 .form-title {
@@ -323,6 +336,7 @@ textarea {
   padding-left: 15px;
   color: #2196f3;
   transition: all 0.3s;
+  font-size: 0.85rem;
 }
 
 .term a:hover,
@@ -454,9 +468,52 @@ input[type="checkbox"] {
 }
 
 .terms-btn {
-	margin-left: 20px;
-	background-color: #ffebee;
-	color: #f44336;
+  margin-left: 20px;
+  background-color: #ffebee;
+  color: #f44336;
 }
 
+.reg-form {
+  z-index: -2;
+}
 
+.modal {
+  max-width: 680px;
+  height: calc(100vh - 50px);
+  margin: 0 auto;
+  background-color: #fff;
+  overflow-x: scroll;
+  z-index: 500;
+
+  .content {
+    box-shadow: 2px 2px 6px rgba(255, 255, 255, 0.8);
+    padding: 30px;
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+    }
+
+    h4 {
+      margin-bottom: 15px;
+    }
+
+    button {
+      margin-top: 25px;
+    }
+  }
+
+  .filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: -3;
+  }
+}
+
+.mb-25 {
+  margin-bottom: 25px;
+}

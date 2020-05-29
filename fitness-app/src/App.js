@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ClassProvider } from "./Components/ClassContext";
-import "./App.css";
+import "./App.scss";
 import PrivateRoute from "./Components/PrivateRoute";
 import Nav from "./Components/Nav";
 import ClassData from "./Components/ClassData";
@@ -11,7 +11,6 @@ import CreateClass from "./Components/CreateClass";
 import Home from "./Components/Home";
 import RegistrationForm from "./Components/RegistrationForm";
 import InstructorLogin from "./Components/InstructorLogin";
-
 
 function App() {
   return (
