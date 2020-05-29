@@ -11,7 +11,7 @@ export default function Home() {
         </h1>
         <div className="separator"></div>
         <Link to="/classes" className="btn-default">
-          Let Get Started
+          Let's Get Started!
         </Link>
       </div>
     </div>

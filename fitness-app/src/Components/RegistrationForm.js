@@ -275,7 +275,7 @@ export default function RegistrationForm() {
       </div>
       <div className="invitation-link">
         <p>
-          If you want to join our team of instructor follow the link below to
+          If you would like to join our team of instructors follow the link below to
           get the One-Time authentication code:
           <Link to="/auth-code">Get code</Link>
         </p>
